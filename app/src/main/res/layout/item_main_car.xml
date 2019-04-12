@@ -27,7 +27,14 @@
         android:padding="10dp"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/img_anh"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
         <TextView
+            android:layout_below="@id/img_anh"
             android:id="@+id/tv_employee_name"
             android:text="gia"
             android:textSize="18sp"

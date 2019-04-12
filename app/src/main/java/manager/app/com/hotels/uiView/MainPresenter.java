@@ -1,5 +1,6 @@
 package manager.app.com.hotels.uiView;
 
+import android.net.Uri;
 import android.util.Log;
 
 import com.google.gson.JsonArray;
@@ -32,7 +33,7 @@ public class MainPresenter {
       ApiClient.getService().getRooms().enqueue(new Callback<ResponseBody>() {
           @Override
           public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+            mainView.hideLoading();
               try {
                //   Log.d(TAG, response.body().string());
                   JSONArray jsonArray = new JSONArray(response.body().string());
@@ -41,15 +42,19 @@ public class MainPresenter {
                   for (int i=0;i<jsonArray.length();i++){
                       JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                      String room_number= jsonObject.getString("room_number");
-                      String price =jsonObject.getString("price");
+                          String room_number= jsonObject.getString("room_number");
+                          String price =jsonObject.getString("price");
                           String  detail =jsonObject.getString("detail");
-
-                          Rooms rooms=new Rooms(room_number,price,detail);
+                          String image =  "http://192.168.86.103:3000/"+jsonObject.getString("image");
+                          Rooms rooms = new Rooms(room_number,price,detail,image);
                           roomsList.add(rooms);
-                      Log.d(TAG,    "hotels "+ roomsList.add(rooms)+"");
+
+                      Log.d("c","hotels "+ image+"");
                   }
-                  mainView.OnGetResult(roomsList);
+                 if (response.isSuccessful()&& response.body()!=null){
+                     mainView.OnGetResult(roomsList);
+                    // mainView.showLoading();
+                 }
               } catch (IOException e) {
                   e.printStackTrace();
               } catch (JSONException e) {

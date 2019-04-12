@@ -1,5 +1,7 @@
 package manager.app.com.hotels.model;
 
+import android.net.Uri;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -42,15 +44,6 @@ public class Rooms {
     @SerializedName("hotelid")
     private List<Hotelid> hotelid;
 
-    public Rooms() {
-    }
-
-    public Rooms(String id, String room_number, String price, String detail) {
-        this.id = id;
-        this.room_number = room_number;
-        this.price = price;
-        this.detail = detail;
-    }
 
     public Rooms(String room_number, String price, String detail) {
         this.room_number = room_number;
@@ -58,15 +51,19 @@ public class Rooms {
         this.detail = detail;
     }
 
-    public Rooms(String room_number, String floor, String single_room, String price, String status, String image, String detail, List<Hotelid> hotelid) {
+    public Rooms(String room_number, String price, String detail, String image) {
         this.room_number = room_number;
-        this.floor = floor;
-        this.single_room = single_room;
         this.price = price;
-        this.status = status;
         this.image = image;
         this.detail = detail;
-        this.hotelid = hotelid;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getRoom_number() {

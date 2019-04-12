@@ -26,8 +26,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-// LocNVPH05730: 12/4/2019
-// NodeSrever:
+/* LocNVPH05730: 12/4/2019
+    NodeSrever:
+
+ */
 
 public class MainActivity extends AppCompatActivity  implements MainView{
 
@@ -49,17 +51,22 @@ public class MainActivity extends AppCompatActivity  implements MainView{
         recyMain.setLayoutManager(new LinearLayoutManager(this));
         mainPresenter=new MainPresenter(this);
         mainPresenter.getdata();
-
+        reflayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mainPresenter.getdata();
+            }
+        });
     }
 
     @Override
     public void showLoading() {
-
+        reflayout.setRefreshing(true);
     }
 
     @Override
     public void hideLoading() {
-
+        reflayout.setRefreshing(false);
     }
 
     @Override
